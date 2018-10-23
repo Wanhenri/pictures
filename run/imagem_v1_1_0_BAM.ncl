@@ -21,9 +21,8 @@ a = 1
         obg=dim_avg_n_Wrap(pg,0)
       
         wks = gsn_open_wks("eps","validation_"+i+"h_BAM")
-      
-      
-      ;gsn_define_colormap(wks,"circular_2")			;para rodar no tupÃ£
+           
+     
       gsn_define_colormap(wks,"BkBlAqGrYeOrReViWh200")	;Para rodar no TupÃ£
       
       plot = new(3,graphic)
@@ -40,47 +39,32 @@ a = 1
       res@lbLabelBarOn        = False  ; Habilitar ou desabilitar a legenda
       res@cnLineLabelsOn      = False
       res@cnLinesOn           = False
-      
-      
-      res@mpLimitMode = "LatLon"	;*********************************************
+           
+      res@mpLimitMode = "LatLon"	
       
       res@mpMinLonF = 270
       res@mpMaxLonF = 335
-      res@mpMinLatF = -57		;
-      res@mpMaxLatF = 13
-      
-      ;res@mpMinLonF = 0
-      ;res@mpMaxLonF = 360
-      ;res@mpMinLatF = -50		;
-      ;res@mpMaxLatF = 50
+      res@mpMinLatF = -57		
+      res@mpMaxLatF = 13   
       res@mpCenterLonF= 180
-      res@mpDataBaseVersion    = "HighRes"
+      res@mpDataBaseVersion = "HighRes"
       
-      res@pmTickMarkDisplayMode                     = "Always"
+      res@pmTickMarkDisplayMode = "Always"
       
       ;******************************Niveis***********************************8
       res@cnLevelSelectionMode = "ExplicitLevels" 
       res@cnLevels                                  = (/2,4,6,8,10,12,14,16,18/)
-      ;***************************************************************
       ;*****************************CORES*************************************
-      ;res@cnFillColors = (/0,88,94,124,139,145,170,177,187,211/) 	; NCV_rainbow2
-      ;res@cnFillColors = (/0,5, 6, 7, 8, 9, 11, 12, 13, 14/)     	; grads_rainbow
       res@cnFillColors = (/0,42,49,62,82,94,123,132,145,161/) 	; BkBlAqGrYeOrReViWh200
       
       
-      ;**********************Label Bar*****************************
-      
-       
-       ;res@lbOrientation     = "Horizontal"
+      ;**********************Label Bar*****************************   
        res@pmLabelBarWidthF  = 0.6            ; make thinner
        res@pmLabelBarOrthogonalPosF = .20          ; move whole thing down
        res@lbTitleOn        = True                  ; turn on title
-        res@lbTitleString    = "Legenda"
-      res@lbTitleFontHeightF= .015                 ; make title smaller
-      
-      
-      
-      ;************************************************************
+       res@lbTitleString    = "Legenda"
+       res@lbTitleFontHeightF= .015                 ; make title smaller
+           
       
       res@tiMainOffsetYF = -0.04     			;reduz o espaÃ§o entre o titulo e a imagem
       						;Start with a small negative value, and then 
@@ -91,17 +75,7 @@ a = 1
       res@gsnLeftString 				= "Versao ->"+convec
       plot(0)=gsn_csm_contour_map_ce(wks,obg, res)  
       
-      
-      ;;res@tiMainFontHeightF   = 0.03   
-      ;res@tiMainString = "Validation MAY/2015 24Z"
-      ;res@gsnLeftString 				= "Versao ->"+convec
-      ;plot(1)=gsn_csm_contour_map_ce(wks,obg, res)  
-      ;
-      ;;res@tiMainFontHeightF   = 0.03   
-      ;res@tiMainString = "Validation MAY/2015 24Z"
-      ;res@gsnLeftString 				= "Versao ->"+convec
-      ;plot(2)=gsn_csm_contour_map_ce(wks,obg, res)  
-      
+       
       
       ;************************************************
       ; create panel
@@ -114,23 +88,16 @@ a = 1
         resP@gsnPanelLabelBar   = True                 ; add common colorbar
         resP@gsnPanelBottom     = 0.05
         resP@gsnPanelMainString = "A common title"     ; new way of setting main title (as of NCL V6.3.1)
-      ; resP@txString           = "A common title"     ; old way of setting main title
-        ;gsn_panel(wks,plot,(/3,1/),resP)               ; now draw as one plot
         gsn_panel(wks,plot,(/1,1/),resP)               ; now draw as one plot
       
       
       ; Draw a text string at the bottom
         txres               = True
         txres@txFontHeightF = 0.015
-        ;gsn_text_ndc(wks,"Figure 1: Brazilian Global Atmospheric Model(BAM)",0.5,0.25,txres)
-        ;gsn_text_ndc(wks,"Figure 1: Brazilian Global Atmospheric Model(BAM)",0.5,0.05,txres)   
         gsn_text_ndc(wks,"Figure "+a+": Brazilian Global Atmospheric Model(BAM)",0.5,0.05,txres)   
-        ;gsn_text_ndc(wks,"Figure 1: A nifty panel plot",0.5,0.02,txres)
         frame(wks)
         delete(wks)
-      ;system("convert -density 150 -trim -rotate -90 TESTE_BAM.eps TESTE_BAM.png ; rm TESTE_BAM.eps")
-      ;system("convert -density 150 -trim -rotate -360 TESTE_BAM.eps TESTE_BAM.png ; rm TESTE_BAM.eps")
-      system("convert -density 150 -trim -rotate -360 validation_"+i+"h_BAM.eps validation_"+i+"h_BAM.png ; rm validation_"+i+"h_BAM.eps")
+        system("convert -density 150 -trim -rotate -360 validation_"+i+"h_BAM.eps validation_"+i+"h_BAM.png ; rm validation_"+i+"h_BAM.eps")
       
       print("Imagem ->>>"+i+"h gerada")
       i=i+24
