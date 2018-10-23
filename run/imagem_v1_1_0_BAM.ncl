@@ -1,7 +1,6 @@
 load "$NCARG_ROOT/lib/ncarg/nclscripts/csm/gsn_code.ncl"
 load "$NCARG_ROOT/lib/ncarg/nclscripts/csm/gsn_csm.ncl"
 
-
 begin
 
 i = 24
@@ -11,23 +10,18 @@ a = 1
       tf = addfile("/home/smagnum/Vídeos/series/MAY2015_"+i+"Z_12Z_NCEP.nc","r")
       pg = tf->prec
       pg@_FillValue=-9.99e+08
-      
-      ;*****************InformaÃ§Ãµes para plotagem***************
-      
+            
       convec	= "BAM"
+     
+      obg=dim_avg_n_Wrap(pg,0)
       
-      ;*********************************************************
-      
-        obg=dim_avg_n_Wrap(pg,0)
-      
-        wks = gsn_open_wks("eps","validation_"+i+"h_BAM")
+      wks = gsn_open_wks("eps","validation_"+i+"h_BAM")
            
      
       gsn_define_colormap(wks,"BkBlAqGrYeOrReViWh200")	;Para rodar no TupÃ£
       
       plot = new(3,graphic)
-      
-      
+            
       res                     = True
       res@gsnMaximize          = True
       res@gsnAddCyclic        = False
@@ -57,8 +51,7 @@ a = 1
       ;*****************************CORES*************************************
       res@cnFillColors = (/0,42,49,62,82,94,123,132,145,161/) 	; BkBlAqGrYeOrReViWh200
       
-      
-      ;**********************Label Bar*****************************   
+       ;**********************Label Bar*****************************   
        res@pmLabelBarWidthF  = 0.6            ; make thinner
        res@pmLabelBarOrthogonalPosF = .20          ; move whole thing down
        res@lbTitleOn        = True                  ; turn on title
@@ -67,15 +60,13 @@ a = 1
            
       
       res@tiMainOffsetYF = -0.04     			;reduz o espaÃ§o entre o titulo e a imagem
-      						;Start with a small negative value, and then 
-      						;make it more negative if you need to move 
-      						;the title closer to the plot. 
+      						            ;Start with a small negative value, and then 
+      						            ;make it more negative if you need to move 
+      						            ;the title closer to the plot. 
       res@tiMainFontHeightF   = 0.03   
       res@tiMainString = "Validation MAY/2015 "+i+"Z"
-      res@gsnLeftString 				= "Versao ->"+convec
-      plot(0)=gsn_csm_contour_map_ce(wks,obg, res)  
-      
-       
+      res@gsnLeftString = "Versao ->"+convec
+      plot(0)=gsn_csm_contour_map_ce(wks,obg, res)        
       
       ;************************************************
       ; create panel
