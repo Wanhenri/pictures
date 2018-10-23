@@ -36,10 +36,6 @@ res@mpMaxLonF = 335
 res@mpMinLatF = -57		
 res@mpMaxLatF = 13
 
-;res@mpMinLonF = 0
-;res@mpMaxLonF = 360
-;res@mpMinLatF = -50		
-;res@mpMaxLatF = 50
 res@mpCenterLonF= 180
 res@mpDataBaseVersion = "HighRes"
 
